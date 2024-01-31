@@ -1,3 +1,3 @@
-/Users/lovedivineonwulata/CLionProjects/makeboxes/cmake-build-debug/CMakeFiles/makeboxes.dir
-/Users/lovedivineonwulata/CLionProjects/makeboxes/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/lovedivineonwulata/CLionProjects/makeboxes/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/ldonw/CLionProjects/makeboxes/cmake-build-debug/CMakeFiles/makeboxes.dir
+C:/Users/ldonw/CLionProjects/makeboxes/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ldonw/CLionProjects/makeboxes/cmake-build-debug/CMakeFiles/rebuild_cache.dir
