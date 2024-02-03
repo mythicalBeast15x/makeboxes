@@ -26,16 +26,29 @@ void promptParams(int* x, int* y, int* rows, int* cols){
     scanf("%d", cols);
     system("cls");
 }
-void printRow(int length, int bufferNum, int leftChar, int rightChar, int filler){
+void gotoxy(short x, short y){
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+void printRow(int length, short x, short y, int leftChar, int rightChar, int filler, bool hasFiller){
     //buffer
+    /*
     for(int b = 0; b < bufferNum; b++){
         printf("%c", whitespace);
-    }
+    }*/
     //first row
+    gotoxy(x, y);
     printf("%c", leftChar);
-    for(int c = 0; c < length; c++){
-        printf("%c", filler);
+    if(hasFiller){
+        for(int c = 0; c < length; c++){
+            gotoxy(x+c+1, y);
+            printf("%c", filler);
+        }
     }
+
+    gotoxy(x+length, y);
     printf("%c", rightChar);
     printf("\n");
 }
@@ -46,14 +59,15 @@ bool makeBox(int x, int y, int rows, int cols){
             printf("\n");
         }
         //top row
-        printRow(cols, x, topLeft, topRight, horizontal);
+        printRow(cols, x, y, topLeft, topRight, horizontal, true);
         //rows
         for(int r = 0; r < rows-1; r++){
-            printRow(cols, x, vertical, vertical, whitespace);
-            printRow(cols, x, leftConnector, rightConnector, horizontal);
+            printRow(cols, x, y+(r+1), vertical, vertical, whitespace, false);
+            printRow(cols, x, y+(r+1), leftConnector, rightConnector, horizontal, true);
         }
-        printRow(cols, x, vertical, vertical, whitespace);
-        printRow(cols, x, bottomLeft, bottomRight, horizontal);
+        //lastrow
+        printRow(cols, x, y+rows, vertical, vertical, whitespace, true);
+        printRow(cols, x, y+rows,bottomLeft, bottomRight, horizontal, true);
         canMake = true;
     }
     return canMake;
@@ -64,8 +78,8 @@ int main() {
     GetWindowRect(console, &r);
     int x, y, rows, cols;
     promptParams(&x,&y,&rows, &cols);
-    MoveWindow(console, r.left, r.top, 500, 500, TRUE);
-    if(!makeBox(0,0,13,maxHorizontal-3)){
+    MoveWindow(console, r.left, r.top, 480, 500, TRUE);
+    if(!makeBox(x,y,rows,cols)){
         printf("Invalid Box");
     }
 
